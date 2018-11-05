@@ -43,47 +43,47 @@ class SignUp extends Component {
         });
     };
 
-    handleSubmit = event => {
+    handleSubmit(event) {
+        console.log(JSON.stringify(this.state));
         event.preventDefault();
-        console.log(this.state.value);
-    };
+    }
 
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <h1>{JSON.stringify(this.state,1,1)}</h1>
+                    <h1>{JSON.stringify(this.state, 1, 1)}</h1>
                     <input
                         type="email"
                         name="email"
                         placeholder="mon@email.com"
-                        onChange={event => this.updateEmailField(event)}                    
+                        onChange={event => this.updateEmailField(event)}
                     />
                     <input
                         type="password"
                         name="password"
                         placeholder="monPassw0rd"
-                        onChange={event => this.updatePasswordField(event)}                    
+                        onChange={event => this.updatePasswordField(event)}
                     />
                     <input
                         type="password"
                         name="password"
                         placeholder="monPassw0rd"
-                        onChange={event => this.updateConfirmPasswordField(event)}                    
+                        onChange={event => this.updateConfirmPasswordField(event)}
                     />
                     <input
                         type="text"
                         name="text"
                         placeholder="James"
-                        onChange={event => this.updateNameField(event)}                    
+                        onChange={event => this.updateNameField(event)}
                     />
                     <input
                         type="text"
                         name="text"
                         placeholder="Bond"
-                        onChange={event => this.updateLastnameField(event)}                    
+                        onChange={event => this.updateLastnameField(event)}
                     />
-                    <input type="submit" value="Soumettre"/>
+                    <input type="submit" value="Soumettre" />
                 </form>
             </div>
         )
