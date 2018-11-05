@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import SignUp from './component/SignUp.js'
+import FormEmployee from './component/FormEmployee.jsx'
 class App extends Component {
   render() {
     return (
-      <SignUp />
+      <FormEmployee />
     );
   }
 }

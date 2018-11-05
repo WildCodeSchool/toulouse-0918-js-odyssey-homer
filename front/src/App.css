@@ -21,6 +21,32 @@
 .App-link {
   color: #61dafb;
 }
+.FormEmployee {
+ width: 400px;
+ margin: 0 auto;
+ text-align: left;
+}
+
+.FormEmployee h1 {
+ text-align: center;
+}
+
+.FormEmployee .form-data {
+ display: flex;
+ justify-content: center;
+ margin: 5px 0;
+}
+
+.FormEmployee .form-data label {
+ display: inline-block;
+ width: 75px;
+ margin-right: 10px;
+ text-align: right;
+}
+
+.FormEmployee .form-data input:not([type="submit"]) {
+ flex-grow: 1;
+}
 
 @keyframes App-logo-spin {
   from {
