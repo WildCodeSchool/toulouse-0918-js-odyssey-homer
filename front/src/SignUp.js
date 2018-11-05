@@ -10,6 +10,7 @@ class SignUp extends Component {
         this.state = {
             email: "",
             password: "",
+            verifypassword: "",
             name: "",
             lastname: ""
         };
@@ -19,6 +20,9 @@ class SignUp extends Component {
         this.setState({ email: event.target.value });
     };
     password = event => {
+        this.setState({ password: event.target.value });
+    };
+    verifypassword = event => {
         this.setState({ password: event.target.value });
     };
     name = event => {
@@ -47,6 +51,11 @@ class SignUp extends Component {
                         <FormGroup>
                             <Label for="examplePassword">Password</Label>
                             <Input onChange={this.password} type="password" name="password"
+                                id="examplePassword" placeholder="monPassw0rd" />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="examplePassword">Password</Label>
+                            <Input onChange={this.verifypassword} type="password" name="password"
                                 id="examplePassword" placeholder="monPassw0rd" />
                         </FormGroup>
                         <FormGroup>
