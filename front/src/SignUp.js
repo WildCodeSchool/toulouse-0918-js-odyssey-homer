@@ -54,7 +54,7 @@ class SignUp extends Component {
                                 id="examplePassword" placeholder="monPassw0rd" />
                         </FormGroup>
                         <FormGroup>
-                            <Label for="examplePassword">Password</Label>
+                            <Label for="examplePassword">Verify your Password</Label>
                             <Input onChange={this.verifypassword} type="password" name="password"
                                 id="examplePassword" placeholder="monPassw0rd" />
                         </FormGroup>
