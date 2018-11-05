@@ -1,25 +1,69 @@
 import React, { Component } from 'react';
+import {
+    Button, Form, FormGroup, Label,
+    Input
+} from 'reactstrap';
 
 class SignUp extends Component {
-    constructor(){
-        super();
-        this.state={title:'test@test.com'};
-        this.handleChange = this.handleChange.bind(this);
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            password: "",
+            fistName: "",
+            lastName: ""
+        };
     }
-    
-    handleChange(event){
-        const textInput = event.target.value;
-        this.setState({title:textInput});
-    }
-    
-    render(){
-            return (
-                <div>
-                   <h1>{this.state.title}</h1>
-                        <label>email : 
-                   <input type="text" onChange={this.handleChange} />
-                        </label>
-                </div>);
+
+    email = event => {
+        this.setState({ email: event.target.value });
+    };
+    password = event => {
+        this.setState({ password: event.target.value });
+    };
+    name = event => {
+        this.setState({ name: event.target.value });
+    };
+    lastname = event => {
+        this.setState({ lastname: event.target.value });
+    };
+
+    handleSubmit = e => {
+        e.preventDefault();
+        console.log(this.state);
+    };
+    render() {
+        return (
+            <div class="container p-5">
+                <div class="container p-5">
+                <h1>{JSON.stringify(this.state)}</h1>
+                    <Form class="container p-5">
+                        <FormGroup>
+                            <Label
+                                for="exampleEmail">Email</Label>
+                            <Input onChange={this.email} type="email" name="email"
+                                id="exampleEmail" placeholder="mon@email.com" />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="examplePassword">Password</Label>
+                            <Input onChange={this.password} type="password" name="password"
+                                id="examplePassword" placeholder="monPassw0rd" />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="name">name</Label>
+                            <Input onChange={this.name} type="text" name="name"
+                                id="name" placeholder="James" />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="lastname">lastname</Label>
+                            <Input onChange={this.lastname} type="text" name="lastname"
+                                id="text" placeholder="Bond" />
+                        </FormGroup>
+                        <Button type="submit" value="Soumettre">Submit</Button>
+                    </Form>
+                </div>
+            </div>
+        );
     }
 }
 export default SignUp;
