@@ -1,0 +1,15 @@
+{
+    "name": "serveur",
+    "version": "1.0.0",
+    "description": "serveur de la Wild",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "wilder",
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "express": "^4.16.3",
+        "morgan": "^1.9.0"
+    }
+}
