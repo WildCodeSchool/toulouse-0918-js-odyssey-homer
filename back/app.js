@@ -3,7 +3,7 @@ const  express  =  require('express');
 const  bodyParser  =  require('body-parser');
 const  morgan  =  require('morgan');
 const  app  =  express();
-
+const connection = require('./helpers/db.js');
 let authRouter = require('./routes/auth/auth');
 
 // je configure l'application
