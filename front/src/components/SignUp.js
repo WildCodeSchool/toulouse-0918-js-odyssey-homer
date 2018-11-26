@@ -1,90 +1,31 @@
 import React, { Component } from 'react';
-import '../style/SignUp.scss';
+
 class SignUp extends Component {
     constructor(props){
         super(props);
         this.state = {
-            email: '',
-            password: '',
-            passwordBis: '',
-            name: '',
-            lastname: '' 
+            email: 'hello@email.com'
         }
     }
 
-    updateEmail(event){
+    updateEmailField(event){
+        const message = 'hello@email.com'
+        const value = event.target.value === '' ? message : event.target.value
         this.setState({
-            email: event.target.value
+            email: value
         })
     }
 
-    updatePassword(event){
-      this.setState({
-          password: event.target.value
-      })
-    }
-
-    updatePasswordBis(event){
-      this.setState({
-          passwordBis: event.target.value
-      })
-    }
-
-    updateName(event){
-      this.setState({
-          name: event.target.value
-      })
-    }
-
-    updateLastName(event){
-      this.setState({
-          lastname: event.target.value
-      })
-    }
-
-    handleSubmit(event) {
-      event.preventDefault();
-      console.log(this.state);
-    }
-    
-
     render() {
         return (
-            <div id="sign-up">
-              <form onSubmit={this.handleSubmit.bind(this)}>
-                  <h1 className="title">{JSON.stringify(this.state,1,1)}</h1>
-                  <input 
-                      type="email" 
-                      name="email"
-                      onChange={this.updateEmail.bind(this)}
-                      placeholder='Type your email here'
-                  />
-                  <input 
-                    type="password"
-                    onChange={this.updatePassword.bind(this)}
-                  />
-                  <input 
-                    type="password"
-                    onChange={this.updatePasswordBis.bind(this)}
-                  />
-                  <input 
-                    type="text" 
-                    name="name"
-                    placeholder='Your name goes here'
-                    onChange={this.updateName.bind(this)}
-                  />
-                  <input 
-                    type="text" 
-                    name="last name" 
-                    placeholder='Your lastname goes here'
-                    onChange={this.updateLastName.bind(this)}
-                  />
-                  <input 
-                    type="submit"
-                    value="Soumettre"
-                    className="btn"
-                  />
-                </form> 
+            <div>
+                <h1>{this.state.email}</h1>
+                <input 
+                    type="email" 
+                    name="email"
+                    onChange={this.updateEmailField.bind(this)}
+                    placeholder='Type your email here'
+                /> 
             </div>
         );
     }
