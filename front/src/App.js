@@ -4,7 +4,7 @@ import SignUp from './components/SignUp';
 class App extends Component {
   render() {
     return (
-        <SignUp />
+      <SignUp />
     );
   }
 }

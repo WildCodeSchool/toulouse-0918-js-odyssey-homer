@@ -12,9 +12,13 @@ router.use(function timeLog (req, res, next) {
 router.post('/signup', (req, res, next) => {
   const post  = req.body;
   connection.query(`INSERT INTO ${table} SET ?`, post, (error, results, fields) => {
-    if (error) res.status(500).end();
+    if(error){
+      res.status(500).json({ flash:  error.message });
+    }
+    else{
+      res.status(200).json({ flash:  "User has been signed up !" });
+    }
   });
-  res.send(`user ${post.name} has been added.`);
 });
 
 module.exports = router;

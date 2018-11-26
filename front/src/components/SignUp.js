@@ -6,11 +6,10 @@ class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstname: '',
-            lastname: '',
-            email: '',
-            pass: '',
-            passConf: ''
+          name: '',
+          lastname: '',
+          email: '',
+          password: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -26,6 +25,19 @@ class SignUp extends Component {
 
     submitForm(e){
       e.preventDefault();
+      fetch("/auth/signup",
+        {
+          method:  'POST',
+          headers: {
+          'Content-Type':  'application/json'
+        },
+        body:  JSON.stringify(this.state),
+      })
+      .then(res  =>  res.json())
+      .then(
+        res  =>  this.setState({"flash":  res.flash}),
+        err  =>  this.setState({"flash":  err.flash})
+      )
       console.log(JSON.stringify(this.state,1,1))
     }
 
@@ -34,12 +46,16 @@ class SignUp extends Component {
         return (
             <div id='signup'>
                 <form action="" id='singup' className='flex-column' onSubmit={this.submitForm}>
+                  {
+                    this.state.flash &&
+                    <p style={{textAlign: 'center', marginBottom: '2em'}}><b>{this.state.flash}</b></p>
+                  }
 
                   <div className="form-group flex-row space-between">
 
                     <div className="input-group f-50">
-                      <label htmlFor="firstname">Prénom</label>
-                      <input type="text" name='firstname' id='firstname'  onChange={this.handleChange} />
+                      <label htmlFor="name">Prénom</label>
+                      <input type="text" name='name' id='name'  onChange={this.handleChange} />
                     </div>
 
                     <div className="input-group f-50">
@@ -57,13 +73,8 @@ class SignUp extends Component {
                   <div className="form-group flex-row space-between">
 
                     <div className="input-group f-50">
-                      <label htmlFor="pass">Mot de passe</label>
-                      <input type="password" name='pass' id='pass'  onChange={this.handleChange} />
-                    </div>
-
-                    <div className="input-group f-50">
-                      <label htmlFor="passConf">Confirmation</label>
-                      <input type="password" name='passConf' id='passConf'  onChange={this.handleChange} />
+                      <label htmlFor="password">Mot de passe</label>
+                      <input type="password" name='password' id='password'  onChange={this.handleChange} />
                     </div>
 
                   </div>
