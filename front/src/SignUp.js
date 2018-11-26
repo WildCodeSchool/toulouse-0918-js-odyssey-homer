@@ -34,10 +34,10 @@ class SignUp extends Component {
     };
     render() {
         return (
-            <div class="container p-5">
-                <div class="container p-5">
+            <div className="container p-5">
+                <div className="container p-5">
                 <h1>{JSON.stringify(this.state)}</h1>
-                    <Form class="container p-5">
+                    <Form onSubmit={this.handleSubmit} className="container p-5">
                         <FormGroup>
                             <Label
                                 for="exampleEmail">Email</Label>
