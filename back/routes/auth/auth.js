@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+<<<<<<< HEAD
 const db = require('../../helpers/db');
 
 router.post('/signup', (req, res) => {
@@ -12,3 +13,13 @@ router.post('/signup', (req, res) => {
 
 module.exports = router;
 
+=======
+
+router.post('/signup', function(req, res, next) {
+    res.send('I am in POST signup');
+});
+
+module.exports = router;
+
+
+>>>>>>> e698f5de11cd6877e85ca30ece20d6d23afb686e
