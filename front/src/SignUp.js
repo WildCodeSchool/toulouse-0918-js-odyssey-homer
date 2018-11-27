@@ -4,11 +4,11 @@ class SignUp extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            email: "mon@email.com",
-            password: "monPassw0rd",
-            passwordVerified: "monPassw0rd",
-            name: "James",
-            lastname: "Bond"
+            email: "",
+            password: "",
+            name: "",
+            lastname: "",
+            flash: ""
         }
         this.updateField = this.updateField.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,9 +19,21 @@ class SignUp extends Component {
             [event.target.name]: event.target.value
         })
     }
-
+    
     handleSubmit = (event) => {
-        console.log(JSON.stringify(this.state))
+        fetch("/auth/signup",
+            {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify(this.state),
+            })
+            .then(res => res.json())
+            .then(
+                res => this.setState({ "flash": res.flash }),
+                err => this.setState({ "flash": err.flash })
+            )
         event.preventDefault()
     }
 
@@ -43,13 +55,6 @@ class SignUp extends Component {
                         type="password"
                         onChange={this.updateField.bind(this)}
                         placeholder="Mot de passe"
-                        autoComplete="off"
-                    />
-                    <input
-                        name="passwordVerified"
-                        type="password"
-                        onChange={this.updateField.bind(this)}
-                        placeholder="Vérification mot de passe"
                         autoComplete="off"
                     />
                     <input
