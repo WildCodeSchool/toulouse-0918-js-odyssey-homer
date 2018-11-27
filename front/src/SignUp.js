@@ -10,9 +10,9 @@ class SignUp extends Component {
         this.state = {
             email: "",
             password: "",
-            verifypassword: "",
             name: "",
-            lastname: ""
+            lastname: "",
+            flash: ""
         };
     }
 
@@ -20,9 +20,6 @@ class SignUp extends Component {
         this.setState({ email: event.target.value });
     };
     password = event => {
-        this.setState({ password: event.target.value });
-    };
-    verifypassword = event => {
         this.setState({ password: event.target.value });
     };
     name = event => {
@@ -35,7 +32,22 @@ class SignUp extends Component {
     handleSubmit = e => {
         e.preventDefault();
         console.log(this.state);
+        fetch("/auth/signup",
+        {
+            method:  'POST',
+            headers:  new  Headers({
+                'Content-Type':  'application/json'
+            }),
+            body:  JSON.stringify(this.state),
+        })
+        .then(res  =>  res.json())
+        .then(
+            res  =>  this.setState({"flash":  res.flash}),
+            err  =>  this.setState({"flash":  err.flash})
+          
+        )
     };
+   
     render() {
         return (
             <div className="container p-5">
@@ -51,11 +63,6 @@ class SignUp extends Component {
                         <FormGroup>
                             <Label for="examplePassword">Password</Label>
                             <Input onChange={this.password} type="password" name="password"
-                                id="examplePassword" placeholder="monPassw0rd" />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="examplePassword">Verify your Password</Label>
-                            <Input onChange={this.verifypassword} type="password" name="password"
                                 id="examplePassword" placeholder="monPassw0rd" />
                         </FormGroup>
                         <FormGroup>
