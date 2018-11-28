@@ -6,9 +6,9 @@ class SignUp extends Component {
         this.state = {
             email: '',
             password: '',
-            passwordBis: '',
             name: '',
-            lastname: '' 
+            lastname: '',
+            flash: ''
         }
     }
 
@@ -44,7 +44,19 @@ class SignUp extends Component {
 
     handleSubmit(event) {
       event.preventDefault();
-      console.log(this.state);
+      fetch("/auth/signup",
+        {
+            method:  'POST',
+            headers:  new  Headers({
+                'Content-Type':  'application/json'
+            }),
+            body:  JSON.stringify(this.state),
+        })
+        .then(res  =>  res.json())
+        .then(
+            res  =>  this.setState({"flash":  res.flash}),
+            err  =>  this.setState({"flash":  err.flash})
+        )
     }
 
     render() {
@@ -62,10 +74,10 @@ class SignUp extends Component {
                     type="password"
                     onChange={this.updatePassword.bind(this)}
                   />
-                  <input 
+                  {/* <input 
                     type="password"
                     onChange={this.updatePasswordBis.bind(this)}
-                  />
+                  /> */}
                   <input 
                     type="text" 
                     name="name"
