@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 
 class SignUp extends Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
       name: '',
-      lastName: ''
+      lastName: '',
+      flash: ''
     }
     this.updateEmailField = this.updateEmailField.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,15 +22,30 @@ class SignUp extends Component {
   }
 
   handleSubmit(event) {
-    console.log(JSON.stringify(this.state,1,1));
-    event.preventDefault();
+    fetch("/auth/signup",
+      {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(this.state),
+      })
+      .then(res => res.json())
+      .then(
+        res => this.setState({ "flash": res.flash }),
+        err => this.setState({ "flash": err.flash })
+      )
+    event.preventDefault()
+
   }
 
 
   render() {
-    return(
+    const { flash } = this.state;
+    const result = flash ? <p>{flash}</p> : null
+    return (
       <form onSubmit={this.handleSubmit}>
-        <h1>{JSON.stringify(this.state,1,1)}</h1>
+        <h1>{JSON.stringify(this.state, 1, 1)}</h1>
         <label id="email" htmlFor="email" >email</label>
         <br />
         <input type="email" name="email" onChange={this.updateEmailField} />
@@ -50,7 +66,10 @@ class SignUp extends Component {
         <br />
         <input type="text" name="lastName" onChange={this.updateEmailField} />
         <br />
-        <input type="submit" value="Soumettre"/>
+        <input type="submit" value="Soumettre" />
+        <p>
+          {result}
+        </p>
       </form>
     );
   }
