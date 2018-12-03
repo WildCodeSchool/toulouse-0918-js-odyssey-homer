@@ -24,6 +24,7 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-let  server = app.listen( process.env.PORT  ||  3001, function(){
-    console.log('Listening on port '  +  server.address().port);
+
+const server = app.listen(process.env.PORT || 3010, () => {
+  console.log('Listening on port' + server.address().port);
 });
