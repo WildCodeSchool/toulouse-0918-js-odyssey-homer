@@ -1,13 +1,35 @@
-label {
+#Sign-Up {
+  height: fit-content;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#Sign-Up label {
   display: block;
 }
 
-input {
-  margin: 1rem;
+#Sign-Up input {
+  border-style: solid;
+  border-color: #808080;
+  border-width: 1px;
+  border-radius: 4px;
+  padding: 4px;
+  width: 100%;
 }
 
-.submitBtn {
-  display: block;
-  margin:auto;
-  display:block;
+#Sign-Up #Button {
+  background:  #FBA858;
+  border-style: none;
+  transition: color 0.5s ease;
+  transition: background 0.5s ease;
+}
+
+#Sign-Up #Button:hover {
+  color: #B1AEAE;
+  background: #FBB776;
+}
+
+#Sign-Up #Button:focus {
+  box-shadow: 0 0 10px #FBA858;
 }
