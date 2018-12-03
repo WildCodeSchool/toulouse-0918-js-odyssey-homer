@@ -9,7 +9,8 @@ class SignUp extends Component {
 			password: '',
 			verifyPassword: '',
 			name: '',
-			surname: ''
+			surname: '',
+			flash: {}
 		};
 		this.updateState = this.updateState.bind(this);
 		this.submitForm = this.submitForm.bind(this);
@@ -22,6 +23,18 @@ class SignUp extends Component {
 	}
 
 	submitForm(event) {
+		fetch("/auth/signup", {
+			method: 'POST',
+			headers: new Headers({
+				'Content-Type': 'application/json'
+			}),
+			body: JSON.stringify(this.state),
+		})
+			.then(res => res.json())
+			.then(
+				res => this.setState({ "flash": res.flash }),
+				err => this.setState({ "flash": err.flash })
+			)
 		event.preventDefault();
 		console.log(JSON.stringify(this.state))
 	}
