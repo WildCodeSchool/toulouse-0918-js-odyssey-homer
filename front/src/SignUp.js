@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Form, FormGroup, Label, Input, Button, Container, Row, Col } from 'reactstrap';
+import Signup from './Signup.css';
 class SignUp extends React.Component {
 
   constructor(props){
@@ -43,40 +44,56 @@ class SignUp extends React.Component {
 
   render() {
     return(
-      <div>
-        <h1>{this.state.value}</h1>
+      <div className="SignUp">
 
-        <form action="" onSubmit={this.handleSubmit}>
-          <div className="pb-3">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" onChange={this.handleChange} name="email"/>
-          </div>
+        <Container  className="formulaire">
+          <Row>
+            <Col md='6' xs='12' className="d-flex justify-content-center align-items-start">
+              <img src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png" />
+            </Col>
 
-          <div className="pb-3">
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" onChange={this.handleChange} name="password"/>
-          </div>
+            <Col md='6' xs='12'  className="mx-auto form">
+              <div className="my-3">
+                <h1>Sign Up !</h1>
+              </div>
+              <div className="for mx-auto">
+              <Form action="" onSubmit={this.handleSubmit}>
 
-          <div className="pb-3">
-            <label htmlFor="passwordbis">PasswordBis</label>
-            <input type="password" name="passwordbis" onChange={this.handleChange} name="passwordbis"/>
-          </div>
+                <FormGroup row>
+                  <Label for="email">Email</Label>
+                  <Input className="border-top-0 border-right-0 border-left-0 rounded-0" type="email" name="email" onChange={this.handleChange} placeholder="email"/>
+                </FormGroup>
 
-          <div className="pb-3">
-            <label htmlFor="name">Name</label>
-            <input type="name" name="name" onChange={this.handleChange} name="name"/>
-          </div>
+                <FormGroup row>
+                  <Label for="password">Password</Label>
+                  <Input className="border-top-0 border-right-0 border-left-0 rounded-0" type="password" name="password" onChange={this.handleChange} id="examplePassword" placeholder="mot de passe"/>
+                </FormGroup>
 
-          <div className="pb-3">
-            <label htmlFor="lastname">Last Name</label>
-            <input type="name" name="lastName" onChange={this.handleChange} name="lastName"/>
-          </div>
+                <FormGroup row>
+                  <Label for="passwordbis">Password Bis</Label>
+                  <Input className="border-top-0 border-right-0 border-left-0 rounded-0" type="passwordbis" name="passwordbis" onChange={this.handleChange} placeholder="mot de passe bis"/>
+                </FormGroup>
 
-          <div>
-            <input type="submit" value='Submit' className='btn btn-danger'/>
-          </div>
+                <FormGroup row>
+                  <Label for="name">Name</Label>
+                  <Input className="border-top-0 border-right-0 border-left-0 rounded-0" type="name" name="name" onChange={this.handleChange} placeholder="nom"/>
+                </FormGroup>
 
-        </form>
+                <FormGroup row>
+                  <Label for="lastname">Last Name</Label>
+                  <Input className="border-top-0 border-right-0 border-left-0 rounded-0" type="lastname" name="lastname" onChange={this.handleChange} placeholder="prénom"/>
+                </FormGroup>
+
+                <FormGroup className="d-flex justify-content-center">
+                  <Button value='Submit'  color="primary">SUBMIT</Button>
+                </FormGroup>
+
+              </Form>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+
 
       </div>
     )
