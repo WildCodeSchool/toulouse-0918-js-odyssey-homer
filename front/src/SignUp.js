@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button, Container, Row, Col } from 'reactstrap';
 import Signup from './Signup.css';
+import axios from 'axios';
+import {ToastContainer, ToastStore} from 'react-toasts';
 class SignUp extends React.Component {
 
   constructor(props){
@@ -24,23 +26,16 @@ class SignUp extends React.Component {
   }
 
   handleSubmit(e){
-    fetch("/auth/signup",
-    {
-      method:  'POST',
-      headers:  new  Headers({
-        'Content-Type':  'application/json'
-      }),
-      body:  JSON.stringify(this.state),
-    })
-    .then(res  =>  res.json())
+    axios.post("/auth/signup", this.state)
     .then(
-      res  =>  this.setState({"flash":  res.flash}),
-      err  =>  this.setState({"flash":  err.flash})
+      res  =>  ToastStore.success(res.data.flash)
+    )
+    .catch(
+      err  =>  ToastStore.error(err.response.data.flash)
     )
     e.preventDefault();
     console.log(JSON.stringify(this.state,1,1))
   }
-
 
   render() {
     return(
@@ -85,7 +80,8 @@ class SignUp extends React.Component {
                 </FormGroup>
 
                 <FormGroup className="d-flex justify-content-center">
-                  <Button value='Submit'  color="primary">SUBMIT</Button>
+                  <Button  value='Submit' type='submit' color="primary" onClick={this.handleClick} >SUBMIT</Button>
+                  <ToastContainer store={ToastStore}/>
                 </FormGroup>
 
               </Form>
