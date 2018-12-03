@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../style/SignUp.scss';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import {ToastContainer, ToastStore} from 'react-toasts';
+import axios from 'axios';
 class SignUp extends Component {
     constructor(props){
         super(props);
@@ -46,18 +47,12 @@ class SignUp extends Component {
 
     handleSubmit(event) {
       event.preventDefault();
-      fetch("/auth/signup",
-        {
-            method:  'POST',
-            headers:  new  Headers({
-                'Content-Type':  'application/json'
-            }),
-            body:  JSON.stringify(this.state),
-        })
-        .then(res  =>  res.json())
+      axios.post("/auth/signup", this.state)
         .then(
-            res  =>  this.setState({"flash":  res.flash}),
-            err  =>  this.setState({"flash":  err.flash})
+            res => ToastStore.success(res.data.flash)
+        )
+        .catch(
+            err => ToastStore.error(err.response.data.flash)
         )
     }
 
@@ -114,7 +109,7 @@ class SignUp extends Component {
                             type="submit"
                             value="Soumettre"
                             className="btn d-flex justify-content-end"
-                            onClick={() => ToastStore.info(flash)}
+                            onClick={() => this.handleSubmit}
                         >
                             Submit
                         </Button>
