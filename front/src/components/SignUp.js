@@ -1,91 +1,99 @@
 import React, { Component } from 'react';
+import { Button, TextField } from '@material-ui/core';
+
 import '../styles/form.scss';
 
 class SignUp extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          name: '',
-          lastname: '',
-          email: '',
-          password: ''
-        }
+  constructor(props) {
+      super(props);
+      this.state = {
+        name: '',
+        lastname: '',
+        email: '',
+        password: ''
+      }
 
-        this.handleChange = this.handleChange.bind(this);
-        this.submitForm = this.submitForm.bind(this);
-    }
+      this.handleChange = this.handleChange.bind(this);
+      this.submitForm = this.submitForm.bind(this);
+  }
 
-    handleChange(e){
-        e.preventDefault();
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    submitForm(e){
+  handleChange(e){
       e.preventDefault();
-      fetch("/auth/signup",
-        {
-          method:  'POST',
-          headers: {
-          'Content-Type':  'application/json'
-        },
-        body:  JSON.stringify(this.state),
+      this.setState({
+          [e.target.name]: e.target.value
       })
-      .then(res  =>  res.json())
-      .then(
-        res  =>  this.setState({"flash":  res.flash}),
-        err  =>  this.setState({"flash":  err.flash})
-      )
-      console.log(JSON.stringify(this.state,1,1))
-    }
+  }
 
-    render() {
+  submitForm(e){
+    e.preventDefault();
+    fetch("/auth/signup",
+      {
+        method:  'POST',
+        headers: {
+        'Content-Type':  'application/json'
+      },
+      body:  JSON.stringify(this.state),
+    })
+    .then(res  =>  res.json())
+    .then(
+      res  =>  this.setState({"flash":  res.flash}),
+      err  =>  this.setState({"flash":  err.flash})
+    )
+    console.log(JSON.stringify(this.state,1,1))
+  }
 
-        return (
-            <div id='signup'>
-                <form action="" id='singup' className='flex-column' onSubmit={this.submitForm}>
-                  {
-                    this.state.flash &&
-                    <p style={{textAlign: 'center', marginBottom: '2em'}}><b>{this.state.flash}</b></p>
-                  }
+  render() {
 
-                  <div className="form-group flex-row space-between">
+    return (
+      <div id='signup'>
+        <form action="" id='singup' onSubmit={this.submitForm}>
+          {
+            this.state.flash &&
+            <p style={{textAlign: 'center', marginBottom: '2em'}}><b>{this.state.flash}</b></p>
+          }
 
-                    <div className="input-group f-50">
-                      <label htmlFor="name">Prénom</label>
-                      <input type="text" name='name' id='name'  onChange={this.handleChange} />
-                    </div>
+            <TextField
+              id="firstname"
+              label="Prénom"
+              className="f-50"
+              margin="normal"
+              type="text"
+              onChange={this.handleChange}
+            />
 
-                    <div className="input-group f-50">
-                      <label htmlFor="lastname">Nom</label>
-                      <input type="text" name='lastname' id='lastname'  onChange={this.handleChange} />
-                    </div>
+            <TextField
+              id="lastname"
+              label="Nom"
+              className="f-50"
+              margin="normal"
+              type="text"
+              onChange={this.handleChange}
+            />
+            
+            <TextField
+              id="email"
+              label="Email"
+              margin="normal"
+              type="email"
+              onChange={this.handleChange}
+            />
+            
+            <TextField
+              id="password"
+              label="Mot de passe"
+              margin="normal"
+              type="password"
+              onChange={this.handleChange}
+            />
 
-                  </div>
+          <Button variant='contained' type='submit' color='primary'>Soumettre</Button>
 
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id='email' onChange={this.handleChange} />
-                  </div>
+        </form>
 
-                  <div className="form-group flex-row space-between">
-
-                    <div className="input-group f-50">
-                      <label htmlFor="password">Mot de passe</label>
-                      <input type="password" name='password' id='password'  onChange={this.handleChange} />
-                    </div>
-
-                  </div>
-
-                  <input type="submit" value='Soumettre' className='btn btn-blue'/>
-
-                </form>
-
-            </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 
 export default SignUp;
