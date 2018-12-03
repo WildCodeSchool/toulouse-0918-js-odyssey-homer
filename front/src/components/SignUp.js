@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../style/SignUp.scss';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {ToastContainer, ToastStore} from 'react-toasts';
 class SignUp extends Component {
     constructor(props){
         super(props);
@@ -60,42 +62,65 @@ class SignUp extends Component {
     }
 
     render() {
+        const { flash } = this.state
         return (
-            <div id="sign-up">
-              <form onSubmit={this.handleSubmit.bind(this)}>
-                  <h1 className="title">{JSON.stringify(this.state,1,1)}</h1>
-                  <input 
-                      type="email" 
-                      name="email"
-                      onChange={this.updateEmail.bind(this)}
-                      placeholder='Type your email here'
-                  />
-                  <input 
-                    type="password"
-                    onChange={this.updatePassword.bind(this)}
-                  />
-                  {/* <input 
-                    type="password"
-                    onChange={this.updatePasswordBis.bind(this)}
-                  /> */}
-                  <input 
-                    type="text" 
-                    name="name"
-                    placeholder='Your name goes here'
-                    onChange={this.updateName.bind(this)}
-                  />
-                  <input 
-                    type="text" 
-                    name="last name" 
-                    placeholder='Your lastname goes here'
-                    onChange={this.updateLastName.bind(this)}
-                  />
-                  <input 
-                    type="submit"
-                    value="Soumettre"
-                    className="btn"
-                  />
-                </form> 
+            <div className="mt-5 mb-4">
+                <Form onSubmit={this.handleSubmit.bind(this)} >
+                    <h4 className="title mb-5"><strong>Sign up !</strong></h4>
+                    <FormGroup>
+                        <Label className="text-muted">Email</Label>
+                        <Input 
+                            type="email" 
+                            name="email"
+                            onChange={this.updateEmail.bind(this)}
+                            placeholder='Type your email here'
+                            className="border-right-0 border-left-0 border-top-0 rounded-0"
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label className="text-muted">Password</Label>
+                        <Input 
+                        type="password"
+                        onChange={this.updatePassword.bind(this)}
+                        className="border-right-0 border-left-0 border-top-0 rounded-0"
+                        />
+
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label className="text-muted">Name</Label>
+                        <Input 
+                        type="text" 
+                        name="name"
+                        placeholder='Your name goes here'
+                        onChange={this.updateName.bind(this)}
+                        className="border-right-0 border-left-0 border-top-0 rounded-0"
+                        />
+                    </FormGroup>
+                    
+                    <FormGroup>
+                        <Label className="text-muted">Name</Label>
+                        <Input 
+                        type="text" 
+                        name="last name" 
+                        placeholder='Your lastname goes here'
+                        onChange={this.updateLastName.bind(this)}
+                        className="border-right-0 border-left-0 border-top-0 rounded-0"
+                        />
+                    </FormGroup>
+
+                    <div className="d-flex justify-content-end mt-5">
+                        <Button 
+                            type="submit"
+                            value="Soumettre"
+                            className="btn d-flex justify-content-end"
+                            onClick={() => ToastStore.info(flash)}
+                        >
+                            Submit
+                        </Button>
+                        <ToastContainer lightBackground position={ToastContainer.POSITION.BOTTOM_CENTER} store={ToastStore}/>
+                    </div>
+                </Form> 
             </div>
         );
     }
