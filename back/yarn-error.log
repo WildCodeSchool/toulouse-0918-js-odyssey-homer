@@ -1,0 +1,32 @@
+Arguments: 
+  /home/wilder/.nvm/versions/node/v8.11.1/bin/node /home/wilder/.nvm/versions/node/v8.11.1/bin/yarn
+
+PATH: 
+  /home/wilder/.nvm/versions/node/v8.11.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.10.1
+
+Node version: 
+  8.11.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/wilder/Documents/Cours Ateliers Quetes Dojos/REACT/toulouse-0918-js-odyssey-homer/back/package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at /home/wilder/.nvm/versions/node/v8.11.1/lib/node_modules/yarn/lib/cli.js:1136:59
+      at Generator.next (<anonymous>)
+      at step (/home/wilder/.nvm/versions/node/v8.11.1/lib/node_modules/yarn/lib/cli.js:98:30)
+      at /home/wilder/.nvm/versions/node/v8.11.1/lib/node_modules/yarn/lib/cli.js:109:13
+      at <anonymous>
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
