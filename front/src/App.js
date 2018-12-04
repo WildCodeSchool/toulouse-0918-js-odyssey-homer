@@ -5,9 +5,9 @@ import SignUp from './SignUp';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-        <SignUp />
+      <div className="App m-5">
+        <header className="App-header m-5">
+            <SignUp />
         </header>
       </div>
     );

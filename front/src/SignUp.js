@@ -1,84 +1,142 @@
 import React, { Component } from 'react';
 import {
     Button, Form, FormGroup, Label,
-    Input
+    Input, Container, Col, Row
 } from 'reactstrap';
+import {ToastContainer, ToastStore} from 'react-toasts';
 
 class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: "",
-            password: "",
-            name: "",
-            lastname: "",
-            flash: ""
+            psw: "",
+            first: "",
+            last: "",
+            flash:""
         };
+        this.updateLast = this.updateLast.bind(this);
+        this.updateFirst = this.updateFirst.bind(this);
+        this.updatePsw = this.updatePsw.bind(this);
+        this.updateEmail = this.updateEmail.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    email = event => {
-        this.setState({ email: event.target.value });
-    };
-    password = event => {
-        this.setState({ password: event.target.value });
-    };
-    name = event => {
-        this.setState({ name: event.target.value });
-    };
-    lastname = event => {
-        this.setState({ lastname: event.target.value });
-    };
-
-    handleSubmit = e => {
-        e.preventDefault();
-        console.log(this.state);
-        fetch("/auth/signup",
-        {
-            method:  'POST',
-            headers:  new  Headers({
-                'Content-Type':  'application/json'
-            }),
-            body:  JSON.stringify(this.state),
+    reset(){
+        this.setState({
+            first: "",
+            last:"",
+            email:"",
+            psw:"",
         })
-        .then(res  =>  res.json())
-        .then(
-            res  =>  this.setState({"flash":  res.flash}),
-            err  =>  this.setState({"flash":  err.flash})
-          
-        )
     };
-   
+    updateFirst(event) {
+        this.setState({
+            first: event.target.value
+        })
+    };
+    updateLast(event) {
+        this.setState({
+            last: event.target.value
+        })
+    };
+    updatePsw(event) {
+        this.setState({
+            psw: event.target.value
+        })
+    }
+    updateEmail(event) {
+        this.setState({
+            email: event.target.value
+        })
+    }
+    handleSubmit = event => {
+        console.log(JSON.stringify(this.state));
+        event.preventDefault();
+        fetch("/auth/signup",
+            {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify(this.state),
+            })
+            .then(res => res.json())
+            .then(
+                res => this.setState({ "flash": res.flash }),
+                err => this.setState({ "flash": err.flash })
+            )
+            .then(() => {ToastStore.info(JSON.stringify(this.state.flash))
+                this.reset();
+            })
+
+    };
+
     render() {
         return (
-            <div className="container p-5">
-                <div className="container p-5">
-                <h1>{JSON.stringify(this.state)}</h1>
-                    <Form onSubmit={this.handleSubmit} className="container p-5">
-                        <FormGroup>
-                            <Label
-                                for="exampleEmail">Email</Label>
-                            <Input onChange={this.email} type="email" name="email"
-                                id="exampleEmail" placeholder="mon@email.com" />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="examplePassword">Password</Label>
-                            <Input onChange={this.password} type="password" name="password"
-                                id="examplePassword" placeholder="monPassw0rd" />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="name">name</Label>
-                            <Input onChange={this.name} type="text" name="name"
-                                id="name" placeholder="James" />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="lastname">lastname</Label>
-                            <Input onChange={this.lastname} type="text" name="lastname"
-                                id="text" placeholder="Bond" />
-                        </FormGroup>
-                        <Button type="submit" value="Soumettre">Submit</Button>
-                    </Form>
-                </div>
-            </div>
+            <Container className="shadow-sm p-3 mb-5 bg-white rounded">
+                <Row>
+                    <Col lg="6" xs="12">
+                        <img
+                            src="https://vignette.wikia.nocookie.net/simpsons/images/3/33/Homer.png/revision/latest?cb=20110703093455&path-prefix=fr"
+                            alt="homer"
+                            style={{ width: "20em" }}
+                            className="text-center mx-auto d-block">
+                        </img>
+                    </Col>
+                    <Col lg="6" xs="12">
+                        <Form onSubmit={this.handleSubmit} className="container p-5">
+                            <h2>SignUp</h2>
+                            <FormGroup>
+                                <Label
+                                    for="email">Email</Label>
+                                <Input 
+                                    onChange={this.updateEmail} 
+                                    value={this.state.email} 
+                                    type="email" 
+                                    name="email"
+                                    id="exampleEmail" 
+                                    placeholder="mon@email.com" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="examplePassword">Password</Label>
+                                <Input 
+                                    onChange={this.updatePsw}
+                                    value={this.state.psw}  
+                                    type="password" name="password"
+                                    id="examplePassword" 
+                                    placeholder="monPassw0rd" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="name">name</Label>
+                                <Input 
+                                    onChange={this.updateLast} 
+                                    value={this.state.last} 
+                                    type="text" 
+                                    name="name"
+                                    id="name" 
+                                    placeholder="James" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="lastname">lastname</Label>
+                                <Input 
+                                    onChange={this.updateFirst}
+                                    value={this.state.first}
+                                    type="text" 
+                                    name="lastname"
+                                    id="text" 
+                                    placeholder="Bond" />
+                            </FormGroup>
+                            <Button
+                                className="btn bg-primary float-right"
+                                type="submit"
+                                value="submit">
+                                Submit
+                                </Button>
+                        </Form>
+                    </Col>
+                </Row>
+                <ToastContainer store={ToastStore}/>
+            </Container>
         );
     }
 }
