@@ -34,19 +34,19 @@ class SignUp extends Component {
         <h1>{myJSON}</h1>
 
         <input onChange={this.updateField}
-        type="email" name="email" placeholder='please enter your email'/>
+        type="email" name="email" placeholder='enter your email'/>
 
         <input onChange={this.updateField}
-        type="password" name="password" placeholder='please enter your password'/>
+        type="password" name="password" placeholder='enter your password'/>
 
         <input onChange={this.updateField}
-        type="password" name="passwordbis" placeholder='please enter your password again'/>
+        type="password" name="passwordbis" placeholder='enter your password again'/>
 
         <input onChange={this.updateField}
-        type="text" name="name" placeholder='please enter your first name'/>
+        type="text" name="name" placeholder='enter your first name'/>
 
         <input onChange={this.updateField}
-        type="text" name="lastname" placeholder='please enter your last name'/>
+        type="text" name="lastname" placeholder='enter your last name'/>
 
         <input type="submit" value="Soumettre"/>
      </form>   
