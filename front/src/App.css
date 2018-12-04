@@ -1,7 +1,13 @@
 .App {
   text-align: center;
 }
-
+.allPage{
+  min-height: 100vh;
+}
+.mainRow{
+  margin-right:10%; 
+  margin-left:10%; 
+}
 label {
   padding-right: 10px;
 }

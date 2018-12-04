@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { ToastContainer, ToastStore } from 'react-toasts';
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
+      lastname: '',
+      name: '',
       password: '',
       passwordConfirm: '',
       email: '',
-      information: ''
+      information: '',
+      flash: ''
     };
     this.onChange = this.onChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.addForm = this.addForm.bind(this);
     this.resetForm = this.resetForm.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onChange(e) {
-    const { password, passwordConfirm, information } = this.state;
+    const { password, passwordConfirm } = this.state;
     const value = e.target.value;
     let message = '';
-    console.log(e.target.name,);
-    if (e.target.name === 'passwordConfirm') {
-      if (password.length!== 0 && password.length === value.length && value === password) {
+    if (e.target.name === passwordConfirm) {
+      if (password.length !== 0 && password.length === value.length && value === password) {
         message = "Password super";
       } else {
         message = "Mauvais password";
@@ -40,27 +43,47 @@ class SignUp extends Component {
   }
 
   resetForm() {
-    this.setState = ({
-      firstName: '',
-      lastName: '',
+    this.setState({
+      lastname: '',
+      name: '',
       password: '',
       passwordConfirm: '',
       email: '',
-      information: ''
+      information: '',      
     });
   }
 
+  handleSubmit(e) {
+    // const {email,password,lastname,name,flash} = this.state;
+    fetch("/auth/signup",
+      {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(this.state),
+      })
+      .then(res => res.json())
+      .then(
+        res => this.setState({ "flash": res.flash }),
+        err => this.setState({ "flash": err.flash })
+      )
+      .then(err => {ToastStore.error(this.state.flash);
+                    this.resetForm();
+                    })
+  }
+
   addForm() {
-    const { etatFormulaire, firstName, lastName, password, passwordConfirm, email, information } = this.state;
+    const { password, passwordConfirm,flash } = this.state;
     if (password !== passwordConfirm) {
       let message = 'Ton password !!! not ok';
       this.setState({
         information: message
       })
     } else {
-      const etatSate = JSON.stringify(this.state);
-      console.log(etatSate);
-      this.resetForm();
+      this.handleSubmit();
+      // if(flash!=='') ToastStore.error(flash);
+      // this.resetForm();
     }
   }
 
@@ -70,73 +93,83 @@ class SignUp extends Component {
   }
 
   render() {
-    const { etatFormulaire, firstName, lastName, password, passwordVerif, email, information } = this.state;
+    const { information } = this.state;
     const etatSate = JSON.stringify(this.state);
     return (
-      <div className="FormFilm">
-        <h2>{etatSate}</h2>
-
-        <form onSubmit={this.submitForm}>
-          <fieldset>
-            <legend>Formulaire d'inscription</legend>
-            <div className="form-data">
-              <label htmlFor="firstName">Nom</label>
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                onChange={this.onChange}
-                value={this.state.firstName}
-              />
+      <Container fluid className="bg-warning allPage">
+        <Row className="p-5 mainRow">
+          <Col xs="12" lg="6" className="bg-white border-bottom border-left border-dark rounded-left d-flex  justify-content-center">
+            <img className="img-fluid" src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png" alt="Card image cap" />
+          </Col>
+          <Col  xs="12" lg="6" className="bg-white pt-5 pb-5 border-bottom border-right Larger shadowLarger shadow border-dark rounded-right">
+            <Form onSubmit={this.submitForm}>
+              <FormGroup className="text-left">
+                <Label className="mb-0" for="lastname">Last name</Label>
+                <Input
+                  className="mt-0 border-top-0 border-right-0 border-left-0"
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  placeholder="name"
+                  onChange={this.onChange}
+                  value={this.state.lastname} />
+              </FormGroup>
+              <FormGroup className="text-left">
+                <Label className="mb-0" for="name">Name</Label>
+                <Input
+                  className="mt-0 border-top-0 border-right-0 border-left-0"
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="name"
+                  onChange={this.onChange}
+                  value={this.state.name} />
+              </FormGroup>
+              <FormGroup className="text-left">
+                <Label className="mb-0" for="examplePassword">Password</Label>
+                <Input
+                  className="mt-0 border-top-0 border-right-0 border-left-0"
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="password"
+                  onChange={this.onChange}
+                  value={this.state.password}
+                />
+              </FormGroup>
+              <FormGroup className="text-left">
+                <Label className="mb-0" for="examplePassword">Password Confirm</Label>
+                <Input
+                  className="mt-0 border-top-0 border-right-0 border-left-0"
+                  type="password"
+                  placeholder="Confirm password"
+                  id="passwordConfirm"
+                  name="passwordConfirm"
+                  onChange={this.onChange}
+                  value={this.state.passwordConfirm}
+                />
+              </FormGroup>
+              <FormGroup className="text-left">
+                <Label className="mb-0" for="email">Email</Label>
+                <Input
+                  className="mt-0 border-top-0 border-right-0 border-left-0"
+                  type="email"
+                  id="email"
+                  name="email"
+                  onChange={this.onChange}
+                  value={this.state.email}
+                  placeholder="Email" />
+              </FormGroup>
+              <FormGroup className="d-flex justify-content-end pr-2">
+                <Button outline color="primary" type="submit" value="SUBMIT">Submit</Button>
+              </FormGroup>
+            </Form>
+            <div id="informatif">
+              <ToastContainer store={ToastStore} />
             </div>
-            <div className="form-data">
-              <label htmlFor="firstName">Prenom</label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                onChange={this.onChange}
-                value={this.state.lastName}
-              />
-            </div>
-            <div className="form-data">
-              <label htmlFor="poster">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={this.onChange}
-                value={this.state.password}
-              />
-            </div>
-            <div className="form-data">
-              <label htmlFor="poster">Password Confirm</label>
-              <input
-                type="password"
-                id="passwordConfirm"
-                name="passwordConfirm"
-                onChange={this.onChange}
-                value={this.state.passwordConfirm}
-              />
-            </div>
-            <div className="form-data">
-              <label htmlFor="poster">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                onChange={this.onChange}
-                value={this.state.email}
-              />
-            </div>
-            <hr />
-            <div className="form-data">
-              <input type="submit" value="Envoyer" />
-            </div>
-          </fieldset>
-        </form>
-        <div id="informatif">{information}</div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
