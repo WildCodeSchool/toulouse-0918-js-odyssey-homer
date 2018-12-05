@@ -75,16 +75,16 @@ class SignUp extends Component {
         return (
             <Container className="shadow-sm p-3 mb-5 bg-white rounded">
                 <Row>
-                    <Col lg="6" xs="12">
+                    <Col lg="6" md="6" sm="12">
                         <img
                             src="https://vignette.wikia.nocookie.net/simpsons/images/3/33/Homer.png/revision/latest?cb=20110703093455&path-prefix=fr"
                             alt="homer"
-                            style={{ width: "20em" }}
+                            // style={{ width: "20em" }}
                             className="text-center mx-auto d-block">
                         </img>
                     </Col>
-                    <Col lg="6" xs="12">
-                        <Form onSubmit={this.handleSubmit} className="container p-5">
+                    <Col lg="6" md="6" sm="12">
+                        <Form onSubmit={this.handleSubmit}>
                             <h2>SignUp</h2>
                             <FormGroup>
                                 <Label

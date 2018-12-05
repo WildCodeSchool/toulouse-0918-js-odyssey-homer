@@ -5,10 +5,10 @@ import SignUp from './SignUp';
 class App extends Component {
   render() {
     return (
-      <div className="App m-5">
-        <header className="App-header m-5">
+      <div className="App">
+            <div className="">
             <SignUp />
-        </header>
+            </div>
       </div>
     );
   }
