@@ -5,7 +5,7 @@ import SignUp from './SignUp';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App d-flex justify-content-center">
         <SignUp />
       </div>
     );
