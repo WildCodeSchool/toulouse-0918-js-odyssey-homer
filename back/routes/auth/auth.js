@@ -10,8 +10,16 @@ router.use(function timeLog (req, res, next) {
 });
 
 router.post('/signup', (req, res, next) => {
-  const user  = req.body;
-  connection.query(`INSERT INTO ${table} SET ?`, user, (error, results, fields) => {
+  const { firstname, lastname, email, password }  = req.body;
+  const data = {
+    name: firstname,
+    lastname,
+    email,
+    password
+  };
+  console.log(data);
+
+  connection.query(`INSERT INTO ${table} SET ?`, data, (error, results, fields) => {
     if(error){
       res.status(500).json({ flash:  error.message });
     }
