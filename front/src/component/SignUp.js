@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import {TextField, Button, Grid, Snackbar} from '@material-ui/core';
+import axios from 'axios';
 
 class SignUp extends Component {
 
@@ -10,7 +12,8 @@ class SignUp extends Component {
       passwordbis: "monPassw0rd",
       name: "Jacques",
       lastname: "Chirac",
-      flash: ""
+      flash: "",
+      open: false,
     };
     this.updateEmailField = this.updateEmailField.bind(this);
     this.updatePWDField = this.updatePWDField.bind(this);
@@ -18,6 +21,7 @@ class SignUp extends Component {
     this.updateNameField = this.updateNameField.bind(this);
     this.updateLastnameField = this.updateLastnameField.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   updateEmailField(event) {
@@ -50,36 +54,46 @@ class SignUp extends Component {
     })
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     console.log(JSON.stringify(this.state));
-    event.preventDefault();
-    fetch("/auth/signup",
-      {
-        method:  'POST',
-        headers:  new  Headers({'Content-Type':  'application/json'}),
-        body:  JSON.stringify(this.state),
-      }
-    )
-    .then(res  =>  res.json())
+    axios.post("/auth/signup",this.state)
+    .then(res  =>  res.data)
     .then(
-      res  =>  this.setState({"flash":  res.flash}),
-      err  =>  this.setState({"flash":  err.flash})
+      res  =>  this.setState({flash:  'User has been sign up !', open : true}),
     )
+    .catch(err  =>  this.setState({flash:  'Error !', open : true}))
   }
+
+  handleClose() {
+    this.setState({ open: false, error: false });
+  };
+
 
   render() {
     return(
-      <Fragment>
-        <h1>{JSON.stringify(this.state)}</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input value={this.state.email} onChange={this.updateEmailField} type="email" name="email"/>
-          <input value={this.state.password} onChange={this.updatePWDField} type="password" name="password"/>
-          <input value={this.state.passwordbis} onChange={this.updatePWDBisField} type="password" name="password"/>
-          <input value={this.state.name} onChange={this.updateNameField} type="name" name="name"/>
-          <input value={this.state.lastname} onChange={this.updateLastnameField} type="lastname" name="lastname"/>
-          <input type="submit" value="Submit" />
+      <Grid container>
+        <form className="container" onSubmit={this.handleSubmit}>
+          <h1>Sign up !</h1>
+          <TextField margin="normal" label="Email" className="textField" value={this.state.email} onChange={this.updateEmailField} type="email" name="email"/>
+          <TextField margin="normal" label="Password" className="textField" value={this.state.password} onChange={this.updatePWDField} type="password" name="password"/>
+          <TextField margin="normal" label="Password copy" className="textField" value={this.state.passwordbis} onChange={this.updatePWDBisField} type="password" name="password"/>
+          <TextField margin="normal" label="Name" className="textField" value={this.state.name} onChange={this.updateNameField} type="name" name="name"/>
+          <TextField margin="normal" label="Last name" className="textField" value={this.state.lastname} onChange={this.updateLastnameField} type="lastname" name="lastname"/>
+
+          <Grid className="containerButton" container direction="row" justify="flex-end" alignItems="center">
+            <Button variant="contained" color="primary" onClick={this.handleSubmit}
+              >Submit
+            </Button>
+            <Snackbar
+              anchorOrigin={{vertical :'bottom', horizontal :'center'}}
+              open={this.state.open}
+              onClose={this.handleClose}
+              ContentProps={{'aria-describedby': 'message-id'}}
+              message={<span id="message-id">{this.state.flash}</span>}
+            />
+          </Grid>
         </form>
-      </Fragment>
+      </Grid>
     );
   }
 }
