@@ -14,6 +14,8 @@
 .submit-form .btn-secondary {
   background-color: #4B00A0;
   border-radius : 0;
+  align-items: right;
+  border: none;
 }
 
 .no-border {
