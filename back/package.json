@@ -4,13 +4,15 @@
     "description": "serveur de la Wild",
     "main": "app.js",
     "scripts": {
-        "start": "node app.js"
+        "start": "node_modules/nodemon/bin/nodemon.js index"
     },
     "author": "wilder",
     "dependencies": {
         "body-parser": "^1.18.2",
         "express": "^4.16.4",
+        "express-validator": "^5.3.0",
         "morgan": "^1.9.0",
-        "mysql": "^2.16.0"
+        "mysql": "^2.16.0",
+        "nodemon": "^1.18.7"
     }
 }

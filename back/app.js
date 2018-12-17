@@ -3,8 +3,8 @@ const  express  =  require('express');
 const  bodyParser  =  require('body-parser');
 const  morgan  =  require('morgan');
 const  app  =  express();
-const connection = require('./helpers/db.js');
-let authRouter = require('./routes/auth/auth');
+const signinRouter = require('./routes/auth/signup.js');
+const signupRouter = require('./routes/auth/signup.js');
 
 // je configure l'application
 app.use(morgan('dev'));
@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended:  false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname  +  '/public'));
 
-app.use('/auth', authRouter);
+app.use('/auth', signupRouter);
+app.use('/auth', signinRouter);
  // j'implémente la partie API
 app.get("/", (req,res) => {
   res.send("youhou");

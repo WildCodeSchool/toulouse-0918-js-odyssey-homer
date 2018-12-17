@@ -73,7 +73,7 @@ class SignUp extends Component {
 
     render() {
         return (
-            <Container className="shadow-sm p-3 mb-5 bg-white rounded">
+            <Container className="shadow-sm p-5 mt-5 bg-white rounded">
                 <Row>
                     <Col lg="6" md="6" sm="12">
                         <img
@@ -102,8 +102,8 @@ class SignUp extends Component {
                                 <Input 
                                     onChange={this.updatePsw}
                                     value={this.state.psw}  
-                                    type="password" name="password"
-                                    id="examplePassword" 
+                                    type="password" name="psw"
+                                    id="psw" 
                                     placeholder="monPassw0rd" />
                             </FormGroup>
                             <FormGroup>
@@ -131,7 +131,7 @@ class SignUp extends Component {
                                 type="submit"
                                 value="submit">
                                 Submit
-                                </Button>
+                            </Button>
                         </Form>
                     </Col>
                 </Row>
