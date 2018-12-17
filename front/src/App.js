@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import SignUp from './components/SignUp';
 import { Container, Row, Col } from 'reactstrap';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
+import Profile from './components/Profile';
+
 
 class App extends Component {
   render() {
@@ -13,7 +17,14 @@ class App extends Component {
           </Col>
 
           <Col md="8" className="">
-            <SignUp />
+            <BrowserRouter >
+              <Switch>
+                <Route exact path="/" component={SignIn} />
+                <Route path="/signin" component={SignIn} />
+                <Route path="/signup" component={SignUp} />
+                <Route path="/profile" component={Profile} />
+              </Switch>
+            </BrowserRouter>
           </Col>
         </Row>
       </Container>

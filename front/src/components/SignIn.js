@@ -10,8 +10,6 @@ class SignUp extends Component {
         this.state = {
             email: '',
             password: '',
-            name: '',
-            lastname: '',
             flash: ''
         }
     }
@@ -28,43 +26,24 @@ class SignUp extends Component {
       })
     }
 
-    updatePasswordBis(event){
-      this.setState({
-          passwordBis: event.target.value
-      })
-    }
-
-    updateName(event){
-      this.setState({
-          name: event.target.value
-      })
-    }
-
-    updateLastName(event){
-      this.setState({
-          lastname: event.target.value
-      })
-    }
-
     handleSubmit(event) {
       event.preventDefault();
-      axios.post("/auth/signup", this.state)
+      axios.post("/auth/signin", this.state)
         .then(
             res => ToastStore.success(res.data.flash)
         )
         .catch(
             err => ToastStore.error(err.response.data.flash)
         )
-        this.props.history.push('/');
+        this.props.history.push('/profile');
     }
-
 
     render() {
         const { flash } = this.state
         return (
             <div className="mt-5 mb-4">
                 <Form onSubmit={this.handleSubmit.bind(this)} >
-                    <h4 className="title mb-5"><strong>Sign up !</strong></h4>
+                    <h4 className="title mb-5"><strong>Sign In !</strong></h4>
                     <FormGroup>
                         <Label className="text-muted">Email</Label>
                         <Input 
@@ -84,43 +63,19 @@ class SignUp extends Component {
                         />
 
                     </FormGroup>
-
-                    <FormGroup>
-                        <Label className="text-muted">Name</Label>
-                        <Input 
-                        type="text" 
-                        name="name"
-                        placeholder='Your name goes here'
-                        onChange={this.updateName.bind(this)}
-                        className="border-right-0 border-left-0 border-top-0 rounded-0"
-                        />
-                    </FormGroup>
-                    
-                    <FormGroup>
-                        <Label className="text-muted">Name</Label>
-                        <Input 
-                        type="text" 
-                        name="last name" 
-                        placeholder='Your lastname goes here'
-                        onChange={this.updateLastName.bind(this)}
-                        className="border-right-0 border-left-0 border-top-0 rounded-0"
-                        />
-                    </FormGroup>
-
                     <div className="d-flex justify-content-end mt-5">
                         <Button 
                             type="submit"
                             value="Soumettre"
-                            className="btn btn-success mr-5"
+                            className="btn- btn-success mr-5"
                             onClick={() => this.handleSubmit}
                         >
                             Submit
                         </Button>
-
-                        <Link to="/signin">
-                            <Button className="btn btn-danger">
-                                Sign in !
-                            </Button>
+                        <Link to="/signup">
+                          <Button className="btn btn-danger">
+                            Sign up !
+                          </Button>
                         </Link>
                         <ToastContainer lightBackground position={ToastContainer.POSITION.BOTTOM_CENTER} store={ToastStore}/>
                     </div>
