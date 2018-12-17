@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Container, Row, Col, Alert } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 import { ToastContainer, ToastStore } from 'react-toasts';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import './App.css'
 
@@ -28,6 +29,7 @@ class SignUp extends Component {
             .then(res => ToastStore.success(res.data.flash))
             .catch(err => ToastStore.error(err.response.data.flash)
             )
+        this.props.history.push("/profile")
         event.preventDefault()
     }
 
@@ -35,6 +37,7 @@ class SignUp extends Component {
         return (
             <div>
                 <Container style={{ backgroundColor: "white", marginTop: "5%" }} className="form-container" >
+                    <h3>SignUp</h3>
                     <Row className="d-flex align-items-center">
                         <Col xs="12" sm="12" md="6" className="d-flex justify-content-center">
                             <img src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png" />
@@ -102,6 +105,7 @@ class SignUp extends Component {
                             </Form>
                         </Col>
                     </Row>
+                    <p className="text-center">You have already a count ? <Link to="/signin">SignIn</Link> !</p>
                 </Container>
                 <ToastContainer store={ToastStore} />
             </div>
