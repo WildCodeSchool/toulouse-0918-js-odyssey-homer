@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { Container, Form, FormGroup, Label, Input, Button, Col, Row } from 'reactstrap';
 import { ToastContainer, toast, ToastStore } from 'react-toasts';
 import axios from 'axios';
-import './SignUp.css';
+
+import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
     constructor(props) {
@@ -159,18 +160,29 @@ class SignUp extends Component {
                                     />
                                 </FormGroup>
 
-                                <Button
-                                    type="submit"
-                                    className="float-right"
-                                    value="Submit"
-                                    onClick={this.handleClick}>Send
-                                </Button>
+                                <Link to="/signin">
+                                    <Button
+                                        type="button"
+                                        className="float-center mr-1"
+                                        value="Text">Sign In !
+                                    </Button>
+                                </Link>
+
+                                <Link to="/">
+                                    <Button
+                                        type="submit"
+                                        className="float-center ml-1"
+                                        value="Submit"
+                                        onClick={this.handleClick}>Send
+                                    </Button>
+                                </Link>
+
                                 <ToastContainer
                                     store={ToastStore}
                                     lightBackground
                                     position={ToastContainer.POSITION.BOTTOM_LEFT}
                                 />
-    
+
                             </Form>
                         </Col>
                     </Row>
