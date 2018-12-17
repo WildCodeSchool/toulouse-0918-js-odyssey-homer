@@ -111,7 +111,7 @@ class SignUp extends Component {
                                         type="email"
                                         name="email"
                                         placeholder="mon@email.com"
-                                        onChange={this.handleChange}
+                                        onChange={this.handleChange.bind(this)}
                                     // onChange={event => this.updateEmailField(event)}
                                     />
                                 </FormGroup>
@@ -122,7 +122,7 @@ class SignUp extends Component {
                                         type="password"
                                         name="password"
                                         placeholder="myPassw0rd"
-                                        onChange={this.handleChange}
+                                        onChange={this.handleChange.bind(this)}
                                     // onChange={event => this.updatePasswordField(event)}
                                     />
                                 </FormGroup>
@@ -133,7 +133,7 @@ class SignUp extends Component {
                                         type="password"
                                         name="password"
                                         placeholder="myPassw0rd"
-                                        onChange={this.handleChange}
+                                        onChange={this.handleChange.bind(this)}
                                     // onChange={event => this.updateConfirmPasswordField(event)}
                                     />
                                 </FormGroup>
@@ -144,7 +144,7 @@ class SignUp extends Component {
                                         type="text"
                                         name="text"
                                         placeholder="James"
-                                        onChange={this.handleChange}
+                                        onChange={this.handleChange.bind(this)}
                                     // onChange={event => this.updateNameField(event)}
                                     />
                                 </FormGroup>
@@ -155,7 +155,7 @@ class SignUp extends Component {
                                         type="text"
                                         name="text"
                                         placeholder="Bond"
-                                        onChange={this.handleChange}
+                                        onChange={this.handleChange.bind(this)}
                                     // onChange={event => this.updateLastnameField(event)}
                                     />
                                 </FormGroup>

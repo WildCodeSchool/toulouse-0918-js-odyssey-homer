@@ -16,11 +16,12 @@ class Profile extends Component {
   }
 
   render() {
+    const { email, password } = this.state
     return (
       <div id="Profile">
         <ListGroup>
-          <ListGroupItem type="email" name="email">mon email</ListGroupItem>
-          <ListGroupItem type="password" name="password">mon password</ListGroupItem>
+          <ListGroupItem>{email}</ListGroupItem>
+          <ListGroupItem>{password}</ListGroupItem>
         </ListGroup>
 
         <Link to="/signin">

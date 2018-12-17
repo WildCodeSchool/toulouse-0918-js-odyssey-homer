@@ -90,7 +90,7 @@ class SignIn extends Component {
                     type="email"
                     name="email"
                     placeholder="mon@email.com"
-                    onChange={this.handleChange}
+                    onChange={this.handleChange.bind(this)}
                   // onChange={event => this.updateEmailField(event)}
                   />
                 </FormGroup>
@@ -101,7 +101,7 @@ class SignIn extends Component {
                     type="password"
                     name="password"
                     placeholder="myPassw0rd"
-                    onChange={this.handleChange}
+                    onChange={this.handleChange.bind(this)}
                   // onChange={event => this.updatePasswordField(event)}
                   />
                 </FormGroup>
