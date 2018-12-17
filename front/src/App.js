@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import SignUp from './components/SignUp';
 import './App.css';
+import { Container } from 'reactstrap';
 
 class App extends Component {
-
   render() {
     return (
-      <div className="App">
+      <Container fluid className="App bg-color" style={{minHeight: "100vh"}}>
         <SignUp/>
-      </div>
+      </Container>
     );
   }
 }

@@ -1,3 +1,22 @@
-.App {
-  text-align: left;
+.bg-color {
+  background-color: #fcb571
+}
+
+.bg-none {
+  background-color: white;
+  box-shadow: 2px 2px 2px black; 
+}
+
+.row .margins {
+  margin-left : 150px;
+  margin-right : 150px
+}
+.submit-form .btn-secondary {
+  background-color: #4B00A0;
+  border-radius : 0;
+}
+
+.no-border {
+  border : 0;
+  box-shadow: none
 }
