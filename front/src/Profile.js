@@ -16,7 +16,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { email, password } = this.state
+    const { email, password } = this.state.profile
     return (
       <div id="Profile">
         <ListGroup>

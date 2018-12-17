@@ -11,8 +11,7 @@ class App extends Component {
       <div className="App d-flex justify-content-center">
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={SignIn} />
-            <Route path="/signin" component={SignIn} />
+            <Route exact path="(/|/signin)" component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <Route path="/profile" component={Profile} />
           </Switch>
