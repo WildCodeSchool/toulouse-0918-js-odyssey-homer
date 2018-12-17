@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-
+import { Link } from 'react-router-dom';
 
 class Profile extends Component {
   constructor(props){
@@ -17,11 +17,16 @@ class Profile extends Component {
   render() {
     const { email, name, lastname } = this.state.profile;
     return(
-      <ListGroup>
-        <ListGroupItem>{email}</ListGroupItem>
-        <ListGroupItem>{name}</ListGroupItem>
-        <ListGroupItem>{lastname}</ListGroupItem>
-      </ListGroup>
+      <div>
+        <div className="mb-5 text-right">
+          <Link to='/signin'> => Log Out</Link>
+        </div>
+        <ListGroup>
+          <ListGroupItem>{email}</ListGroupItem>
+          <ListGroupItem>{name}</ListGroupItem>
+          <ListGroupItem>{lastname}</ListGroupItem>
+        </ListGroup>
+      </div>
     )
   }
 }

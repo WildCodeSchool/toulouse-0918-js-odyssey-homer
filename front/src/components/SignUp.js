@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Form, FormGroup, Input, Label, Button } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
   
@@ -34,14 +35,14 @@ class SignUp extends Component {
       .catch(
         err => toast.error(err.response.data.flash)
       )
-    event.preventDefault();
+      // event.preventDefault();
   } 
 
   render () {
     const myJSON = JSON.stringify(this.state);    
     return (
       <div>
-        <h5 className="mb-2"><strong>Sign up !</strong></h5>          
+        <h5 className="mb-5"><strong>Sign up !</strong></h5>          
         <Form
           onSubmit={this.handleSubmit} 
           className="submit-form">
@@ -80,9 +81,16 @@ class SignUp extends Component {
               onChange={this.updateField}
               type="text" name="lastname" id="lastname" placeholder="Enter your lastname"/>
           </FormGroup>
-          <Button type="submit" value="SUBMIT" className="float-right"><strong>SUBMIT</strong></Button>
+          <Link to='/profile' tag={Link}>
+            <Button type="submit" value="SUBMIT" className="float-right"><strong>SUBMIT</strong></Button>
+          </Link>
           <ToastContainer />
         </Form>
+        <div className="mt-5">
+          Already have an account ?
+          <br />
+          <Link to='/' tag={Link}>SignIn now !</Link>
+        </div>
       </div>
     );
   }

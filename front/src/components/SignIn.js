@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Row, Col, Form, FormGroup, Input, Label, Button } from 'reactstrap';
+import { Form, FormGroup, Input, Label, Button } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 class SignIn extends Component {
   
@@ -24,20 +25,20 @@ class SignIn extends Component {
   }
 
   handleSubmit = event => {
-    axios.post('/auth/signin', this.state) //Requete
+    axios.post('/auth/signin', this.state)
       .then(
-        response => toast.success('User has been signed in!')
+        response => toast.success('User has been signed in!'),
+        <Link to='/profile' tag={Link} />
       )
       .catch(
         err => toast.error(err.response.data.flash)
       )
-    event.preventDefault();
-  } 
+  }
 
   render () {
     return (
       <div>
-        <h5 className="mb-2"><strong>Sign in !</strong></h5>          
+        <h5 className="mb-5"><strong>Sign in !</strong></h5>       
         <Form
           onSubmit={this.handleSubmit} 
           className="submit-form">
@@ -55,9 +56,18 @@ class SignIn extends Component {
               onChange={this.updateField}
               type="password" name="password" id="password" placeholder="Enter your password" />
           </FormGroup>
-          <Button type="submit" value="SUBMIT" className="float-right"><strong>SUBMIT</strong></Button>
-          <ToastContainer />
+          <div className="text-right">
+          <Link to='/profile' tag={Link}>
+            <Button type="submit" value="SUBMIT" className="float-right"><strong>SUBMIT</strong></Button>
+          </Link>
+          </div>
         </Form>
+          <div className="mt-5">
+            Don't have an account yet ?
+            <br />
+            <Link to='/signup' tag={Link}>SignUp now !</Link>
+          </div>
+          <ToastContainer />
       </div>
     );
   }
